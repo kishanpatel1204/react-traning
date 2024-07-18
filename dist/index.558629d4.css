@@ -1,0 +1,23 @@
+.card {
+  width: 270px;
+  margin: 5px;
+}
+
+.product-wrapper {
+  padding: 20px;
+}
+
+.categorys {
+  width: unset;
+  margin: 3px;
+}
+
+.product-link {
+  text-decoration: none;
+}
+
+.productcard {
+  left: 50%;
+  transform: translate(-50%, 10%);
+}
+/*# sourceMappingURL=index.558629d4.css.map */
