@@ -1,12 +1,13 @@
  import react from "react";
  import { Link } from "react-router-dom";
  import { useDispatch } from "react-redux";
- import { addItem } from "../utils/cartSlice";
+ import { addItem,removeItem } from "../utils/cartSlice";
  
  export default Products = (props) => {
-     const {id,thumbnail,title, description, category } = props.prod || props.p;
+     const {id,thumbnail,title, description, category ,price,discountPercentage} = props.prod || props.p ;
      const { isActive } = props;
-     console.log(isActive);
+     const {isActived} = props;
+
      const dispatch = useDispatch();
 
      const handleAddtoCart = (e, product) => {
@@ -15,20 +16,32 @@
         
      }
 
+     const handleRemoveItem = (e, r ) =>{
+        console.log('pr',r)
+        e.preventDefault();
+        dispatch(removeItem(idx, r));
+     }
+
      return(
          <div className="col">
              <Link className="product-link" to={`/product/`+id}>
                  <div className="card" >
+                    {isActived === true ? <span class="badge text-bg-danger bdg">{discountPercentage}% <br></br>Sale </span> :
+                     ''
+                    }
+                 
                          <img src={thumbnail} className="card-img-top" alt="..."/>
                          <div className="card-body">
-                             <div>
+                             
                                  <h5 className="card-title">{title}</h5>
                                  <p className="card-text">{description}</p>
+                                 <p className="card-text">Price : {price}</p>
                                  <span className="badge text-bg-secondary">{category}</span>
-                             </div>
+                             <br></br>
+                             <br></br>
                              {
-                                isActive === true ? <a href="#" onClick={ (e)=> handleAddtoCart(e, props.prod)} className="btn btn-primary">Remove</a> :
-                                 <a href="#" onClick={ (e)=> handleAddtoCart(e, props.prod)} className="btn btn-primary">Add to cart</a>
+                                isActive === true ? <a href="#" onClick={ (e) => handleRemoveItem(e, props.p.id)} className="btn btn-primary">Remove</a> :
+                                 <a href="" onClick={ (e)=> handleAddtoCart(e, props.prod)} className="btn btn-primary">Add to cart</a>
                              }
                          </div>
                  </div>
@@ -38,11 +51,10 @@
  }
  
  export const DiscountedProduct = (Products) => {
-     return(props) => {
+     return(pr) => {
          return(
              <>
-                 <span class="badge text-bg-secondary">50% </span>
-                 <Products {...props} /> 
+                 <Products {...pr} isActived={true} /> 
              </>
          )
      }

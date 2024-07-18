@@ -1,6 +1,14 @@
+
 .card{
     width: 270px;
     margin: 5px;
+}
+.bdg{
+    width: 70px;
+   margin: 2px;
+   height: 40px;
+   text-align: center;
+    font-size: medium;
 }
 
 .product-wrapper{
